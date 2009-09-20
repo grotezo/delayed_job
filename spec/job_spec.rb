@@ -156,6 +156,7 @@ describe Delayed::Job do
     @job.reload.failed_at.should == nil
     @job.reschedule 'FAIL'
     @job.reload.failed_at.should_not == nil
+    @job.last_error.should == "FAIL\n"
 
     Delayed::Job.destroy_failed_jobs = default
   end
